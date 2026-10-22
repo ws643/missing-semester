@@ -186,4 +186,21 @@ vim 文件名
   - git是当前最流行的版本控制工具
 
 ### 语法 
-
+ origin = clone的远程仓库别名
+ 上游：本地分支对应的远程分支
+  - git diff ----对比工作区和暂存区
+  - git diff --staged ---暂存区对比最新commit
+  - git diff HEAD ----工作区对比上一次commit、
+  - git push  ---推送本地分支到远程
+    git push -u origin 分支名---第一次push，绑定上游分支
+  - git pull-----从远程拉取仓库
+  git push = git fetch + git merge
+  fetch:只下载，不合并 
+  - git branch-----列出所有分支
+  - git switch -c 分支名 ---- 创建并切换分支
+  - git switch 分支名 ----切换分支，如果远程没有同名分支且本地也没有会报错
+  - git merge 分支名  ----合并指定分支到当前分支
+  - git log ----查看历史提交记录
+### worktree
+  ### 用途
+  实现多分支并行开发，同一个仓库开出多个工作树，每个工作树绑定不同分支（git clone下来的库也算一个工作树），每个工作树在实体对应一个文件夹，每个文件夹里的东西可能不一样因为你要改，开出的新工作树在任意一个工作树中执行git push  
