@@ -276,4 +276,7 @@ vim 文件名
     - gitdir---记录当前树的绝对路径
     - commondir---“我的历史数据不在这，去主库.git文件找"
 
-
+g++
+cmake
+make
+catkin
