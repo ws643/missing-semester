@@ -1,9 +1,12 @@
 # 课程笔记
 
-##目录
+## 目录
 
 一 . [Markdown语法](#markdown-语法)
-二 . [Git And Github]
+二 . [Linux](#linux)
+三 . [Vim编辑器](#vim编辑器)
+四 . [Shell](#shell)
+五 . [Git And Github](#git-and-github)
 
 
 
