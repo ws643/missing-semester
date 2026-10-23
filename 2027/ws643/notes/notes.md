@@ -239,7 +239,7 @@ vim 文件名
     git push -u origin 分支名---第一次push，绑定上游分支
      （-u : 绑定分支与分支，以后在这个分支git push ,git pull默认
   - git pull <网址> <要拉取的远程仓库的分支名> <本地分支名（可以不写，默认当前所在分支）>-----从远程拉取仓库
-  git push = git fetch + git merge
+  git pull = git fetch + git merge
   fetch:只下载，不合并 
   - git branch-----列出所有分支
   - git switch -c 分支名 ---- 创建并切换分支
