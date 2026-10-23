@@ -224,21 +224,32 @@ vim 文件名
   - git 存的是整个文件的快照，存之前算哈希，一样就存指针，不一样才存文件，zlib压缩，以哈希命名存在.git/objects里，如果是大文件，改得次数多但是每次改得不多，就差异存储，主文件存一份，其他存他跟主文件的差异，这些全打包在一起成为.pack文件存储，gti gc可以强制执行差异存储+压缩（只对文本文件有效）
 
 ### 语法 
- origin = clone的远程仓库别名
+ ###### origin = clone的自己的远程仓库的别名
+ git clone会自动绑定origin
+ ###### upstream = fork过来的原仓库
  上游：本地分支对应的远程分支
+  - ==git remote add upstream <老师仓库的URL> ------绑定原仓库用于pull更新==
+  - git remote -v    -------查看连了哪些仓库
+    （会输出4个，两个fetch两个push,origin和upstream）
+  - git branch -vv  ------查看当前分支绑定了哪个上游仓库
   - git diff ----对比工作区和暂存区
   - git diff --staged ---暂存区对比最新commit
   - git diff HEAD ----工作区对比上一次commit、
   - git push  ---推送本地分支到远程
     git push -u origin 分支名---第一次push，绑定上游分支
-  - git pull-----从远程拉取仓库
+     （-u : 绑定分支与分支，以后在这个分支git push ,git pull默认
+  - git pull <网址> <要拉取的远程仓库的分支名> <本地分支名（可以不写，默认当前所在分支）>-----从远程拉取仓库
   git push = git fetch + git merge
   fetch:只下载，不合并 
   - git branch-----列出所有分支
   - git switch -c 分支名 ---- 创建并切换分支
   - git switch 分支名 ----切换分支，如果远程没有同名分支且本地也没有会报错
   - git merge 分支名  ----合并指定分支到当前分支
+  - git branch -d 分支名 ------删除分支
   - git log ----查看历史提交记录
+  A..B  ------只看B有，A没有的
+  A...B ------看A有B没有加上A没有B有的
+  - git log <排除的基准>..<包含的终点> -----"查看在【终点】里但不在【基准】里的提交记录"
   - git reset --soft HEAD~x----撤销上x次commit,退回暂存区
   - git reset --mixed HEAD~x---也是撤销上x次commit,但是退回工作区
   - git reset --soft <某次commit的哈希>----退回哈希对应的commit
