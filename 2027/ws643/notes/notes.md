@@ -253,6 +253,17 @@ vim 文件名
   - git reset --soft HEAD~x----撤销上x次commit,退回暂存区
   - git reset --mixed HEAD~x---也是撤销上x次commit,但是退回工作区
   - git reset --soft <某次commit的哈希>----退回哈希对应的commit
+  - git branch -r ----展示本地电脑里目前缓存的所有远程分支快照
+  eg.
+  ```shell
+  a@a-VMware:~/missing-semester/2027/ws643/notes$ git branch -r
+  origin/HEAD -> origin/master #当前默认分支是master，别人克隆我的仓库默认是master分支，别人看我主页是默认展示master分支，别人给我发pr是默认发在master分支
+  origin/master    # 展示本地有的，缓存了的分支
+  origin/ws643     # 展示本地有的，缓存了的分支
+  #由于没有去upstream上拉取过数据，所以本地没有缓存，没有展示这个
+  ```
+
+
 ### worktree
   ### 介绍
   实现多分支并行开发，同一个仓库开出多个工作树（==每个工作树有独立的暂存区，全部存在主库.git文件里==），每个工作树绑定不同分支（git clone下来的库也算一个工作树），每个工作树在实体对应一个文件夹，每个文件夹里的东西可能不一样因为你要改，开出的新工作树不包括.git文件，但是有一个小的.git文件但是只记录路径）在任意一个工作树中执行git push，其他工作树里不会变化,在其中一个工作树里git pull,共享的.git文件会变化当前工作树也会变化，git fetch只有.git文件会变，当前工作树不变，无论是pull还是fetch，其他工作树都不变，想同步得手动merge
