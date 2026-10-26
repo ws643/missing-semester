@@ -212,7 +212,79 @@ vim 文件名
 
 
 ## shell
+SHELL是用户和系统之间的翻译官，负责解析并执行命令
+   - cat /etc/shells  ----列出所有shell
+   - echo ----打印
+   - $变量名 -----读取环境变量的值
+   - echo $HOME ----输出家目录，即 ～
+   - echo $SHELL ----- 输出默认登录SHELL，登录后不变
+   - echo $0  ------在终端里敲会输出当前运行的shell
+              ------在脚本(.sh文件)里写：
+              -----如果是用./test.sh运行，输出./test.sh                         
+              -----如果是用bash test.sh运行，输出test.sh,会自动跳过脚本里的shebang(脚本第一行#！解释器路径)
+  - 进入子SHELL直接敲SHELL名字，退出用exit
 
+  ### 脚本编写
+  #### 脚本基础
+  - shebang ---- #!解释器路径
+  - exit 0   ----退出，0表示成功
+  - chmod +x test.sh ----为文件赋予执行权限
+  - ./test.sh ----运行文件
+  - bash test.sh ----运行文件
+  #### 输入输出
+  - echo  "xxx"  ---打印xxx , echo默认会自动换行
+  - printf "%s\n" "内容" -----格式化输出
+  ```shell
+  pritf "hello world\n"   # 输出hello world
+  ```
+  ```shell
+  #!/bin/bath
+
+  name="tom"
+  printf "姓名： %s\n" "$name"
+  ```
+  - read 变量名 ----作用类似scanf
+  - read -p "请输入：" name -----带提示语
+  - raed -s password ----读取不会显示在屏幕上，适合输密码
+  - read -t 5 name  ----最多等5秒
+  - read -r line ----不处理反斜杠，建议总是加上，比如输入c:/code,不会自动变成c:code,而是保留原始输入
+  #### 其他命令
+  - date ----显示当前日期和时间
+  - whoami ----显示当前用户
+  - export name -----把name升级成环境变量，子进程中也能看见
+  - export -n name ------把name从环境变量中拿出来
+  - 脚本传参：
+    ./test.sh apple banana ...
+    程序名 参数1 参数2 ...
+    - $0 ---./test.sh
+    - $1 ---apple
+    - $2 ---banana
+    - $# ---2(总参数数)
+    - $@ ---apple banana (所有参数)
+    - $? ---获取上一条命令的退出码
+      用法：
+      ```shell
+      ls 
+      echo $?
+      # ls执行成功输出0,否则输出非0
+      ```
+  #### 循环
+  ```shell
+  for i in 1 2 3
+  do 
+    echo $i 
+  done
+  #do done类似c语言大括号
+  #输出1\n 2\n 3\n
+  ```
+  ```shell
+  n = 0
+  while [ $n -lt 5 ]; #-ls less than, 循环条件是n<5 
+  do
+  n=$((n+1))  # 等于C语言的n = n + 1;
+  echo $n
+  done
+ ```
 
 
  ## Git And Github
