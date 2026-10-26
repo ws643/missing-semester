@@ -213,6 +213,8 @@ vim 文件名
 
 ## shell
 SHELL是用户和系统之间的翻译官，负责解析并执行命令
+##### logic
+ 打开终端，bash自动运行，输出a@a
    - cat /etc/shells  ----列出所有shell
    - echo ----打印
    - $变量名 -----读取环境变量的值
@@ -284,7 +286,18 @@ SHELL是用户和系统之间的翻译官，负责解析并执行命令
   n=$((n+1))  # 等于C语言的n = n + 1;
   echo $n
   done
+  ```
+ #### 函数
+ ```shell
+ say()  #直接写函数名
+ {
+  echo "hello $1"
+ }
+
+ say world #调用say函数，传参world
+ echo $? #接收最后一条执行命令的退出码
  ```
+ #### 管道 & 重定向
 
 
  ## Git And Github
