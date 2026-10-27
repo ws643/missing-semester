@@ -158,6 +158,8 @@
   - cat ----打印整个文件内容到终端
   - ps ---- 查看当前进程
   - top ---查看系统资源占用 
+  - sleep 100 ----当前进程等待100秒
+  - exec -----替换当前进程
 
 ## Vim编辑器 
 ### 进入
@@ -212,9 +214,11 @@ vim 文件名
 
 
 ## shell
-SHELL是用户和系统之间的翻译官，负责解析并执行命令
+SHELL是用户和系统之间的翻译官，负责解析并执行命令,运行外部程序时，由SHELL请求内核创建新进程，新进程拥有新PID，运行后子进程会自动退出(sleep , exec除外)
+###### 区分SHELL内置命令和外部命令：type 命令名
 ##### logic
  打开终端，bash自动运行，输出a@a
+   - echo $$ ----输出当前进程的PID
    - cat /etc/shells  ----列出所有shell
    - echo ----打印
    - $变量名 -----读取环境变量的值
@@ -225,6 +229,8 @@ SHELL是用户和系统之间的翻译官，负责解析并执行命令
               -----如果是用./test.sh运行，输出./test.sh                         
               -----如果是用bash test.sh运行，输出test.sh,会自动跳过脚本里的shebang(脚本第一行#！解释器路径)
   - 进入子SHELL直接敲SHELL名字，退出用exit
+  - echo "$SHLVL" ---查看当前在第几个进程，输出1表示在第1个进程，2表示在一级子进程中
+
 
   ### 脚本编写
   #### 脚本基础
@@ -232,7 +238,8 @@ SHELL是用户和系统之间的翻译官，负责解析并执行命令
   - exit 0   ----退出，0表示成功
   - chmod +x test.sh ----为文件赋予执行权限
   - ./test.sh ----运行文件
-  - bash test.sh ----运行文件
+  - bash test.sh ----创建子进程运行文件
+  - source text.sh ----在当前进程上直接运行text.sh
   #### 输入输出
   - echo  "xxx"  ---打印xxx , echo默认会自动换行
   - printf "%s\n" "内容" -----格式化输出
@@ -297,8 +304,17 @@ SHELL是用户和系统之间的翻译官，负责解析并执行命令
  say world #调用say函数，传参world
  echo $? #接收最后一条执行命令的退出码
  ```
- #### 管道 & 重定向
-
+ #### 管道
+  ```shell
+  ls | grep txt 
+  # ls列出文件，不显示，直接交给grep过滤出含txt的行
+  ```
+#### 重定向
+```shell
+echo hello > a.txt #把hello写入a.txt，如果文件不存在就创建，如果存在，就清空之后写入
+echo hello >> a.txt #hello追加写入a.txt,不会清空原文档
+wc -l < a.txt #wc--t统计字数，-l统计行数，表示，读取a.txt的行数并输出（不用echo就输出） 
+```
 
  ## Git And Github
 
