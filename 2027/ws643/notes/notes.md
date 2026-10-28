@@ -406,7 +406,15 @@ wc -l < a.txt #wc--t统计字数，-l统计行数，表示，读取a.txt的行�
     - gitdir---记录当前树的绝对路径
     - commondir---“我的历史数据不在这，去主库.git文件找"
 
-g++
-cmake
-make
-catkin
+  ### 后悔药
+  - git restore . ----撤销还未add的更改
+  - git restore 文件名 -----恢复单个文件
+  - git restore --staged . ---add之后后悔了用
+  - git merge --abort ---终止正在进行的合并
+  - git stash---将现在暂未提交的工作暂时收起来
+    git stash push -m "备注"
+  - git stash -u ---同时存下未add过的文件
+  - git stash pop ---取出，删除储藏记录
+  - git stash apply ----取出但是不删记录
+  - git reflog----查看本地git引用和HEAD曾经指向的提交
+  - git reset --hard 哈希 ---将当前分支的指针，暂存区，工作区都重置到哈希对应的提交
