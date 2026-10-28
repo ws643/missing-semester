@@ -334,6 +334,8 @@ wc -l < a.txt #wc--t统计字数，-l统计行数，表示，读取a.txt的行�
   - ssh-keygen -t ed25519 -C
   - cat 地址
   - ssh -T git@github.com
+  - git remote set-url origin git@github.com:用户名/仓库名.git
+  - git remote -v
 ### 语法 
  ###### origin = clone的自己的远程仓库的别名
  git clone会自动绑定origin
