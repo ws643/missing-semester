@@ -37,6 +37,8 @@
   project(project1 cpp)
   add_source_directory(. CMAKRLEARN)
   add_executable(main2 ${CMAKRLEARN})
+  target_include_directories(main2 PRIVATE include)
+  #局部绑定头文件，只给main2用，PRIVATE表示当前头文件只允许给main2用
   ```
 #### 规则
 
@@ -45,10 +47,9 @@
 ```cmake
 cmake_minimum_required(VERSION 3.19)
 project(project3)
-set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-add_source_directory(src CMAKELEARN)
-include_directories(include)
-add_exevutable(main3 ${CMAKELEARN})
+aux_source_directory("${CMAKE_CURRENT_SOURCE_DIR}/src" SOURCES)
+add_executable(demo ${SOURCES})
+target_include_directories(demo PRIVATE "${CMAKE_SOURCE_DIR}/include")
 ```
 #### 增量构建
       有时只改了一部分文件，没有全改，不用全编译
@@ -62,3 +63,6 @@ add_exevutable(main3 ${CMAKELEARN})
       g++ -c add.cpp
       g++ add.cpp main.cpp -o demo
 ```
+==makefile文件中增量构建由make自动判断，由于add.cpp时间戳晚于add.o，判定被修改，重新编译，然后检查依赖，发现demo，也会重新编译==
+
+# catkin
