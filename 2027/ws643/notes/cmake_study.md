@@ -4,11 +4,11 @@
       hello.c(文本)
 ### - 预处理
       展开头文件
-      g++ -E main.cpp -o main.i
+      g++ -E main.cpp -o main.ii
       hello.i(文本)
 ### - 编译
       生成汇编语言
-      g++ -S main.i -o main.s
+      g++ -S main.ii -o main.s
       hello.s(文本)
 ### - 汇编
       生成机器码
@@ -17,6 +17,7 @@
 ### - 链接
       g++ main.o add.o -o demo
       链接到静态库或者动态库（共享库）
+一次性全执行 : ==g++ main.cpp add.cpp -o demo==
       
 
 ## CMakeLists.txt 文件
@@ -48,4 +49,16 @@ set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 add_source_directory(src CMAKELEARN)
 include_directories(include)
 add_exevutable(main3 ${CMAKELEARN})
+```
+#### 增量构建
+      有时只改了一部分文件，没有全改，不用全编译
+      For example:
+```shell
+      vim main.cpp
+      vim add.cpp
+      g++ main.cpp add.cpp -o demo
+      ./demo
+      vim add.cpp
+      g++ -c add.cpp
+      g++ add.cpp main.cpp -o demo
 ```
