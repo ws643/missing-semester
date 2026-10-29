@@ -4,14 +4,18 @@
       hello.c(文本)
 ### - 预处理
       展开头文件
+      g++ -E main.cpp -o main.i
       hello.i(文本)
 ### - 编译
       生成汇编语言
+      g++ -S main.i -o main.s
       hello.s(文本)
 ### - 汇编
       生成机器码
+      g++ -c main.s -o main.o
       hello.o
 ### - 链接
+      g++ main.o add.o -o demo
       链接到静态库或者动态库（共享库）
       
 
